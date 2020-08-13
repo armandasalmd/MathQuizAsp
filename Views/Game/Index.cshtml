@@ -1,0 +1,60 @@
+﻿@model MathQuizAsp.Models.GameViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Math Quiz is cool. Isn't it!</h2>
+
+<p>Selected difficulty: @Model.Difficulty</p>
+<p>Questions remainting: @Model.QuestionsRemaining</p>
+
+@{
+    if (!Model.IsGameFinished)
+    {
+        <span>
+            <p>Answer this question, please: </p>
+            <h2>@Model.CurrentQuestion.GetQuestion()</h2>
+            @if (!Model.IsAnsweringMode)
+            {
+                <h2>@Model.UserAnswer</h2>
+            }
+        </span>
+
+        
+        if (!Model.IsAnsweringMode)
+        {
+            if (Model.UserAnswer == Model.CurrentQuestion.Answer.ToString())
+            {
+                <p style="color:green">You are absolutely correct!</p>
+            }
+            else
+            {
+                <span><p style="color:red">You did a mistake! Correct answer is </p><p style="font-weight: bold">@Model.CurrentQuestion.Answer</p></span>
+            }
+        }
+        
+
+        if (Model.IsAnsweringMode)
+        {
+            <form method="post">
+                <input name="UserAnswer" type="number" placeholder="Your guess" />
+                <input type="submit" value="Submit your answer" />
+            </form>
+        }
+        else
+        {
+            <form method="post">
+                <input type="submit" value="Next question" />
+            </form>
+        }
+    }
+    else
+    {
+        <h2>Congratulations for completing the game!</h2>
+        <span>Your accuracy is: <h3>@Model.Accuracy %</h3></span>
+        <form action="/" method="get">
+            <input type="submit" value="Start over again!"/>
+        </form>
+    }
+}

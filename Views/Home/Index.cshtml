@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Game menu";
+}
+
+<h1>Welcome to MathQuiz</h1>
+
+<p>Select game difficulty and start playing!</p>
+
+<form method="post">
+    <label for="difficulty">Select difficulty:</label>
+    <select name="difficulty" id="difficulty">
+        @foreach (string difficulty in ViewBag.DifficultiesList)
+        {
+        <option value="@difficulty">@difficulty</option>
+        }
+    </select>
+    <label for="questionCount">Select question count:</label>
+    <input name="qcount" type="number" value="5" min="1" max="25"/>
+    <input type="submit" value="Start playing!" />
+    @if (!Request.QueryString["error"].IsEmpty())
+    {
+        <p class="alert-danger">@Request.QueryString["error"]</p>
+    }
+    <p></p>
+</form>
