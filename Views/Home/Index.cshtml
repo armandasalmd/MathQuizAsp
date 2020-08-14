@@ -2,7 +2,7 @@
     ViewBag.Title = "Game menu";
 }
 
-<h1>Welcome to MathQuiz</h1>
+<h1 id="yellow-text">Welcome to MathQuiz</h1>
 
 <p>Select game difficulty and start playing!</p>
 
@@ -16,7 +16,7 @@
     </select>
     <label for="questionCount">Select question count:</label>
     <input name="qcount" type="number" value="5" min="1" max="25"/>
-    <input type="submit" value="Start playing!" />
+    <input class="board-btn" type="submit" value="Start playing!" />
     @if (!Request.QueryString["error"].IsEmpty())
     {
         <p class="alert-danger">@Request.QueryString["error"]</p>

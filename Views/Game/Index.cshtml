@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Math Quiz is cool. Isn't it!</h2>
+<h1 id="yellow-text">Math Quiz is fun. Isn't it!</h1>
 
 <p>Selected difficulty: @Model.Difficulty</p>
 <p>Questions remainting: @Model.QuestionsRemaining</p>
@@ -14,47 +14,57 @@
     {
         <span>
             <p>Answer this question, please: </p>
-            <h2>@Model.CurrentQuestion.GetQuestion()</h2>
+            <h1 id="yellow-text" class="d-inline">@Model.CurrentQuestion.GetQuestion()</h1>
             @if (!Model.IsAnsweringMode)
             {
-                <h2>@Model.UserAnswer</h2>
+                <h1 class="d-inline">@Model.UserAnswer</h1>
             }
         </span>
 
-        
+
         if (!Model.IsAnsweringMode)
         {
             if (Model.UserAnswer == Model.CurrentQuestion.Answer.ToString())
             {
-                <p style="color:green">You are absolutely correct!</p>
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    You are absolutely correct!
+                </div>
             }
             else
             {
-                <span><p style="color:red">You did a mistake! Correct answer is </p><p style="font-weight: bold">@Model.CurrentQuestion.Answer</p></span>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    You did a mistake! Correct answer is:<strong> @Model.CurrentQuestion.Answer</strong>
+                </div>
             }
         }
-        
+
 
         if (Model.IsAnsweringMode)
         {
+            <text>
             <form method="post">
-                <input name="UserAnswer" type="number" placeholder="Your guess" />
-                <input type="submit" value="Submit your answer" />
+                <div class="form-group">
+                    <input name="UserAnswer" type="number" class="form-control" placeholder="Your guess" id="inputDefault">
+                </div>
+                <input class="board-btn" type="submit" value="Check your answer" />
             </form>
+            </text>
         }
         else
         {
             <form method="post">
-                <input type="submit" value="Next question" />
+                <input class="board-btn" type="submit" value="Next question" />
             </form>
         }
     }
     else
     {
-        <h2>Congratulations for completing the game!</h2>
-        <span>Your accuracy is: <h3>@Model.Accuracy %</h3></span>
+        <h1>Congratulations for completing the game!</h1>
+        <span>Your accuracy is: <p>@Model.Accuracy %</p></span>
         <form action="/" method="get">
-            <input type="submit" value="Start over again!"/>
+            <input class="board-btn" type="submit" value="Start over again!" />
         </form>
     }
 }
