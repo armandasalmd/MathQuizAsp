@@ -33,6 +33,8 @@ namespace MathQuizAsp.Models
             get => AllQuestions.Count == CurrentQuestionId;
         }
 
+        public long FinishTillTime { get; set; }
+
         public GameViewModel(string difficulty, int totalQuestions)
         {
             Difficulty = difficulty;
@@ -42,6 +44,7 @@ namespace MathQuizAsp.Models
                         (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficulty));
             IsAnsweringMode = true;
             UserAnswer = string.Empty;
+            FinishTillTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + (totalQuestions * 5000 * 1); // 5s per question
         }
 
         public bool CheckAnswer(int userGuess)
@@ -61,6 +64,13 @@ namespace MathQuizAsp.Models
         {
             CurrentQuestionId++;
             IsAnsweringMode = true;
+            UserAnswer = string.Empty;
+        }
+
+        public void ForceFinish()
+        {
+            CurrentQuestionId = TotalQuestions;
+            IsAnsweringMode = false;
             UserAnswer = string.Empty;
         }
     }

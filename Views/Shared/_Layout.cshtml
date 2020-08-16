@@ -14,7 +14,7 @@
                 <span class="icon">
                     <img src="@Url.Content("~/Content/Images/calculator.png")" />
                 </span>
-                
+
                 @Html.ActionLink("Math school", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
         </div>
@@ -35,6 +35,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/timer")
     @RenderSection("scripts", required: false)
 </body>
 </html>

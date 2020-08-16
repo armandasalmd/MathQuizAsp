@@ -47,24 +47,11 @@ textarea {
     margin-top: 32px;
 }
 
-    .class-board h1 {
-        color: #d2d2d2;
-    }
-
-.class-board p {
-    color: white;
-    font-size: large;
-    font-weight: 400;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+.class-board h1 {
+    color: #d2d2d2;
 }
 
-.class-board label {
-    color: white;
-    font-size: large;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-}
-
-.class-board span {
+.class-board p, .class-board label, .class-board span, #timer-container p {
     color: white;
     font-size: large;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
@@ -80,4 +67,8 @@ textarea {
 
 #desks-img {
     text-align: center;
+}
+
+#timer-container p {
+    display: inline;
 }

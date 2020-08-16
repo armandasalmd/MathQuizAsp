@@ -64,11 +64,20 @@
             }
             else
             {
-                // Go to the next question
                 vm.NextQuestion();
             }
 
             return View(vm);
+        }
+
+        public ActionResult TimerIsUp()
+        {
+            GameViewModel vm = Session["GameViewModel"] as GameViewModel;
+            if (vm != null)
+            {
+                vm.ForceFinish();
+            }
+            return RedirectToAction("Index", "Game");
         }
     }
 }
