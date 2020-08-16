@@ -1,70 +1,66 @@
 ﻿@model MathQuizAsp.Models.GameViewModel
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Game mode";
 }
 
-<h1 id="yellow-text">Math Quiz is fun. Isn't it!</h1>
+@* Green board header container *@
+<div id="info-panel">
+    <h1 id="yellow-text">Math Quiz is fun. Isn't it!</h1>
+    <p>Selected difficulty: @Model.Difficulty</p>
+    <p>Questions remainting: @Model.QuestionsRemaining</p>
+</div>
 
-<p>Selected difficulty: @Model.Difficulty</p>
-<p>Questions remainting: @Model.QuestionsRemaining</p>
-
-@{
-    if (!Model.IsGameFinished)
-    {
-        <span>
-            <p>Answer this question, please: </p>
-            <h1 id="yellow-text" class="d-inline">@Model.CurrentQuestion.GetQuestion()</h1>
-            @if (!Model.IsAnsweringMode)
-            {
-                <h1 class="d-inline">@Model.UserAnswer</h1>
-            }
-        </span>
-
-
-        if (!Model.IsAnsweringMode)
-        {
-            if (Model.UserAnswer == Model.CurrentQuestion.Answer.ToString())
-            {
-                <div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    You are absolutely correct!
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-dismissible alert-danger">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    You did a mistake! Correct answer is:<strong> @Model.CurrentQuestion.Answer</strong>
-                </div>
-            }
-        }
-
-
-        if (Model.IsAnsweringMode)
-        {
-            <text>
-            <form method="post">
-                <div class="form-group">
-                    <input name="UserAnswer" type="number" class="form-control" placeholder="Your guess" id="inputDefault">
-                </div>
-                <input class="board-btn" type="submit" value="Check your answer" />
-            </form>
-            </text>
-        }
-        else
-        {
-            <form method="post">
-                <input class="board-btn" type="submit" value="Next question" />
-            </form>
-        }
-    }
-    else
-    {
+@* Render this when game is finished *@
+@if (Model.IsGameFinished)
+{
+    <div id="main-container">
         <h1>Congratulations for completing the game!</h1>
         <span>Your accuracy is: <p>@Model.Accuracy %</p></span>
         <form action="/" method="get">
             <input class="board-btn" type="submit" value="Start over again!" />
         </form>
+    </div>
+}
+
+@* Render this when game in progress *@
+@if (!Model.IsGameFinished)
+{
+<div id="question-container">
+    <p>Answer the question below,</p>
+    <h1 id="yellow-text" class="d-inline">@Model.CurrentQuestion.GetQuestion()</h1>
+
+    @if (Model.IsAnsweringMode)
+    {
+        using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.TextBox("Answer", "", new { type = "number", placeholder = "Your guess" })
+                @Html.ValidationMessage("Answer", new { @class = "text-danger" })
+                <input class="board-btn" type="submit" value="Check your answer" />
+            </div>
+        }
     }
+
+    @if (!Model.IsAnsweringMode)
+    {
+        <h1 class="d-inline">@Model.UserAnswer</h1>
+        if (Model.UserAnswer == Model.CurrentQuestion.Answer.ToString())
+        {
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                You are absolutely correct!
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                You did a mistake! Correct answer is:<strong> @Model.CurrentQuestion.Answer</strong>
+            </div>
+        }
+        <form method="post">
+            <input class="board-btn" type="submit" value="Next question" />
+        </form>
+    }
+</div>
 }

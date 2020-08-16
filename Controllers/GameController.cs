@@ -1,26 +1,23 @@
-﻿using MathQuizAsp.GameCore;
-using MathQuizAsp.Models;
-using Microsoft.Ajax.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.SessionState;
-
-namespace MathQuizAsp.Controllers
+﻿namespace MathQuizAsp.Controllers
 {
+    using MathQuizAsp.Models;
+    using Microsoft.Ajax.Utilities;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
+
     [SessionState(SessionStateBehavior.Default)]
     public class GameController : Controller
     {
-        // GET: Game
+
         public ActionResult Index()
         {
             // Validation
-            if (Session["ConfigDifficulty"] == null || Session["ConfigDifficulty"].ToString().IsNullOrWhiteSpace())
+            if (Session["ConfigDifficulty"] == null ||
+                Session["ConfigDifficulty"].ToString().IsNullOrWhiteSpace())
             {
                 return RedirectToAction("Index", "Home", new { error = "Difficulty is not set!?" });
-            } else if (Session["ConfigQuestionCount"] == null || (int)Session["ConfigQuestionCount"] < 1)
+            }
+            else if (Session["ConfigQuestionCount"] == null || (int)Session["ConfigQuestionCount"] < 1)
             {
                 return RedirectToAction("Index", "Home", new { error = "Question count is not set!?" });
             }
@@ -43,14 +40,25 @@ namespace MathQuizAsp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(UserAnswerDTO body)
+        public ActionResult Index(UserAnswer body)
         {
             GameViewModel vm = Session["GameViewModel"] as GameViewModel;
+            
+            if (vm == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!ModelState.IsValid)
+            {
+                return Index();
+            }
+
+
             if (vm.IsAnsweringMode)
             {
-                if (!body.UserAnswer.IsNullOrWhiteSpace())
+                if (!body.Answer.IsNullOrWhiteSpace())
                 {
-                    int.TryParse(body.UserAnswer, out int userGuess);
+                    int.TryParse(body.Answer, out int userGuess);
                     vm.CheckAnswer(userGuess);
                 }
             }
@@ -59,7 +67,7 @@ namespace MathQuizAsp.Controllers
                 // Go to the next question
                 vm.NextQuestion();
             }
-            
+
             return View(vm);
         }
     }

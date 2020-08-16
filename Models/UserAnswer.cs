@@ -5,13 +5,13 @@ using System.Web;
 
 namespace MathQuizAsp.Models
 {
-    public class UserAnswerDTO
+    public class UserAnswer
     {
-        public string UserAnswer { get; set; }
+        public string Answer { get; set; }
         public int UserAnswerInt {
             get
             {
-                bool success = int.TryParse(UserAnswer, out int parsedValue);
+                bool success = int.TryParse(Answer, out int parsedValue);
                 return success ? parsedValue : 0;
             }
         }

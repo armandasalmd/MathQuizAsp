@@ -1,25 +1,40 @@
-﻿@{
+﻿@model MathQuizAsp.Models.GameSettings
+@{
     ViewBag.Title = "Game menu";
 }
 
 <h1 id="yellow-text">Welcome to MathQuiz</h1>
-
 <p>Select game difficulty and start playing!</p>
 
-<form method="post">
-    <label for="difficulty">Select difficulty:</label>
-    <select name="difficulty" id="difficulty">
-        @foreach (string difficulty in ViewBag.DifficultiesList)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @*@Html.Label("Difficulty", "Select difficulty:")*@
+        @Html.LabelFor(model => model.Difficulty)
+        @Html.DropDownList("Difficulty", new SelectList(ViewBag.DifficultiesList, "Medium"), new { name = "Difficulty" })
+        @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @*@Html.Label("QuestionCount", "Select question count:")*@
+        @Html.LabelFor(model => model.QuestionCount)
+        @Html.TextBox("QuestionCount", 5, new { type = "number", min = 1, max = 25 })
+        @Html.ValidationMessageFor(model => model.QuestionCount, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input class="board-btn" type="submit" value="Start playing!" />
+        @if (!Request.QueryString["error"].IsEmpty())
         {
-        <option value="@difficulty">@difficulty</option>
+            <p class="alert-danger">@Request.QueryString["error"]</p>
         }
-    </select>
-    <label for="questionCount">Select question count:</label>
-    <input name="qcount" type="number" value="5" min="1" max="25"/>
-    <input class="board-btn" type="submit" value="Start playing!" />
-    @if (!Request.QueryString["error"].IsEmpty())
-    {
-        <p class="alert-danger">@Request.QueryString["error"]</p>
-    }
-    <p></p>
-</form>
+    </div>
+
+</div>
+}

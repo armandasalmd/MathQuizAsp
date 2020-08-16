@@ -1,8 +1,7 @@
-﻿using MathQuizAsp.Models;
+﻿using MathQuizAsp.GameCore;
+using MathQuizAsp.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.SessionState;
 
@@ -17,11 +16,8 @@ namespace MathQuizAsp.Controllers
             {
                 Session.Clear();
             }
-            
-            List<string> difficulties = new List<string>() { "Easy", "Medium", "Hard" };
-            ViewBag.DifficultiesList = difficulties;
 
-            
+            ViewBag.DifficultiesList = Enum.GetNames(typeof(DifficultyLevel)).ToList();
 
             return View();
         }
@@ -29,17 +25,24 @@ namespace MathQuizAsp.Controllers
         [HttpPost]
         public ActionResult Index(GameSettings gameConfig)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Session["ConfigDifficulty"] = gameConfig.difficulty;
-                Session["ConfigQuestionCount"] = int.Parse(gameConfig.qcount);
+                try
+                {
+                    Session["ConfigDifficulty"] = gameConfig.Difficulty;
+                    Session["ConfigQuestionCount"] = int.Parse(gameConfig.QuestionCount);
+                    return RedirectToAction("Index", "Game");
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Index", "Home", new { error = "Invalid options selected" });
+                }
             }
-            catch (Exception)
+            else
             {
-                return RedirectToAction("Index", "Home", new { error = "Invalid options selected" });
+                return Index();
             }
-            
-            return RedirectToAction("Index", "Game");
         }
     }
+
 }

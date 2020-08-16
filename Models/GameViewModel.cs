@@ -1,14 +1,12 @@
 ﻿using MathQuizAsp.GameCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace MathQuizAsp.Models
 {
     public class GameViewModel
     {
-        // Game menu settings
         public string Difficulty { get; }
         public int TotalQuestions { get; }
         public int CorrectUserAnswers { get; set; }
@@ -25,6 +23,9 @@ namespace MathQuizAsp.Models
         public MathQuestion CurrentQuestion { get => AllQuestions[CurrentQuestionId]; }
 
         public bool IsAnsweringMode { get; set; }
+
+        [Required]
+        [MinLength(1, ErrorMessage = "So what's your guess?")]
         public string UserAnswer { get; set; }
 
         public bool IsGameFinished

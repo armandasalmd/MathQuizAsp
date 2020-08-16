@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using MathQuizAsp.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace MathQuizAsp.Models
 {
     public class GameSettings
     {
-        public string difficulty { get; set; }
-        public string qcount { get; set; }
+        [Display(Name = "Select difficulty:")]
+        [IsDifficulty(ErrorMessage = "Incorrect difficulty")]
+        [Required(ErrorMessage = "Select difficulty level")]
+        public string Difficulty { get; set; }
+
+        [Display(Name = "Select question count:")]
+        [Required(ErrorMessage = "Select question count")]
+        public string QuestionCount { get; set; }
 
     }
 }
