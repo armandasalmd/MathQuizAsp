@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -15,5 +16,6 @@ namespace MathQuizAsp.Models
                 return success ? parsedValue : 0;
             }
         }
+
     }
 }

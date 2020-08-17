@@ -15,14 +15,12 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        @*@Html.Label("Difficulty", "Select difficulty:")*@
         @Html.LabelFor(model => model.Difficulty)
         @Html.DropDownList("Difficulty", new SelectList(ViewBag.DifficultiesList, "Medium"), new { name = "Difficulty" })
         @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        @*@Html.Label("QuestionCount", "Select question count:")*@
         @Html.LabelFor(model => model.QuestionCount)
         @Html.TextBox("QuestionCount", 5, new { type = "number", min = 1, max = 25 })
         @Html.ValidationMessageFor(model => model.QuestionCount, "", new { @class = "text-danger" })
@@ -35,6 +33,5 @@
             <p class="alert-danger">@Request.QueryString["error"]</p>
         }
     </div>
-
 </div>
 }

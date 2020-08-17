@@ -1,5 +1,10 @@
 ﻿var titleElement = document.getElementById("timer-title");
-var countDownDate = parseInt(document.getElementById("finish-time-input").value);
+var finishTimeElement = document.getElementById("finish-time-input");
+
+var countDownDate;
+if (finishTimeElement) {
+    countDownDate = parseInt(finishTimeElement.value);
+}
 
 updateLabel();
 
@@ -16,7 +21,6 @@ function updateLabel() {
     if (timeLeft <= 0) {
         clearInterval(x);
         window.location.replace("/Game/TimerIsUp");
-        console.log("Timer stopped");
     } else if (minutes > 0) {
         titleElement.innerHTML = minutes + "m " + seconds + "s";
     } else {

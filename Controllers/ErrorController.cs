@@ -26,7 +26,7 @@ namespace MathQuizAsp.Controllers
             return View();
         }
 
-        public ActionResult InternalError()
+        public ActionResult InternalError() 
         {
 
             return View();

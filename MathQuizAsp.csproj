@@ -123,6 +123,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Exceptions\TimerIsUpException.cs" />
     <Compile Include="GameCore\Enum.cs" />
     <Compile Include="GameCore\IQuestion.cs" />
     <Compile Include="GameCore\MathInterpreter.cs" />

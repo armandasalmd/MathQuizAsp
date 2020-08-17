@@ -2,6 +2,7 @@
 {
     using MathQuizAsp.Models;
     using Microsoft.Ajax.Utilities;
+    using System;
     using System.Web.Mvc;
     using System.Web.SessionState;
 
@@ -43,23 +44,28 @@
         public ActionResult Index(UserAnswer body)
         {
             GameViewModel vm = Session["GameViewModel"] as GameViewModel;
-            
             if (vm == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (!ModelState.IsValid)
-            {
-                return Index();
-            }
-
 
             if (vm.IsAnsweringMode)
             {
                 if (!body.Answer.IsNullOrWhiteSpace())
                 {
                     int.TryParse(body.Answer, out int userGuess);
-                    vm.CheckAnswer(userGuess);
+                    try
+                    {
+                        vm.CheckAnswer(userGuess);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.GetType() == typeof(Exceptions.TimerIsUpException))
+                        {
+                            return RedirectToAction("TimerIsUp", "Game");
+                        }
+                        else throw ex;
+                    }
                 }
             }
             else

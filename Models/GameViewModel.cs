@@ -24,8 +24,6 @@ namespace MathQuizAsp.Models
 
         public bool IsAnsweringMode { get; set; }
 
-        [Required]
-        [MinLength(1, ErrorMessage = "So what's your guess?")]
         public string UserAnswer { get; set; }
 
         public bool IsGameFinished
@@ -34,6 +32,9 @@ namespace MathQuizAsp.Models
         }
 
         public long FinishTillTime { get; set; }
+        public bool IsQuizStillValid { 
+            get => FinishTillTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        }
 
         public GameViewModel(string difficulty, int totalQuestions)
         {
@@ -49,6 +50,9 @@ namespace MathQuizAsp.Models
 
         public bool CheckAnswer(int userGuess)
         {
+            if (!IsQuizStillValid)
+                throw new Exceptions.TimerIsUpException("User's JS is probably disabled. Timer is up!");
+
             bool isUserCorrect = userGuess == CurrentQuestion.Answer;
             if (isUserCorrect)
             {
@@ -72,6 +76,13 @@ namespace MathQuizAsp.Models
             CurrentQuestionId = TotalQuestions;
             IsAnsweringMode = false;
             UserAnswer = string.Empty;
+        }
+
+        public DateTime UnixTimeToDateTime(long unixtime)
+        {
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddMilliseconds(unixtime).ToLocalTime();
+            return dtDateTime;
         }
     }
 }

@@ -64,7 +64,7 @@
     }
     <div id="timer-container">
         <p>Time left:</p>
-        <p id="timer-title">Let's begin!</p>
+        <p id="timer-title">@Model.UnixTimeToDateTime(Model.FinishTillTime).ToString("HH:mm:ss")</p>
         <input id="finish-time-input" type="hidden" value="@Model.FinishTillTime" />
     </div>
 </div>

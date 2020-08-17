@@ -20,6 +20,8 @@ namespace MathQuizAsp.GameCore
         }
 
         public int UserResponse { get; set; }
+
+        public long AnswerTimestamp { get; set; }
         #endregion
 
         #region Constructors
