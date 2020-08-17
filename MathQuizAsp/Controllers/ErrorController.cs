@@ -11,24 +11,21 @@ namespace MathQuizAsp.Controllers
         // GET: Error
         public ActionResult Index()
         {
-            return View();
+            return NotFound();
         }
 
         public ActionResult NotFound()
         {
-
             return View();
         }
 
         public ActionResult BadRequest()
         {
-
             return View();
         }
 
         public ActionResult InternalError() 
         {
-
             return View();
         }
     }

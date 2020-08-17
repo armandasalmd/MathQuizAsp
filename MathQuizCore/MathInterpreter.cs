@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using MathQuizCore.Enums;
 
-namespace MathQuizAsp.GameCore
+namespace MathQuizCore
 {
     public class MathInterpreter : List<MathObject>
     {

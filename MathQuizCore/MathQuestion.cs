@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MathQuizCore.Enums;
+using MathQuizCore.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace MathQuizAsp.GameCore
+namespace MathQuizCore
 {
     public class MathQuestion : IQuestion<int>
     {

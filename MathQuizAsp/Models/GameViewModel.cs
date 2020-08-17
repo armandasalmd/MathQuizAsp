@@ -1,7 +1,7 @@
-﻿using MathQuizAsp.GameCore;
+﻿using MathQuizCore;
+using MathQuizCore.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace MathQuizAsp.Models
 {

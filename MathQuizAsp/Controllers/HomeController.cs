@@ -1,5 +1,5 @@
-﻿using MathQuizAsp.GameCore;
-using MathQuizAsp.Models;
+﻿using MathQuizAsp.Models;
+using MathQuizCore.Enums;
 using System;
 using System.Linq;
 using System.Web.Mvc;

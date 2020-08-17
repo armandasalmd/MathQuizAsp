@@ -1,4 +1,4 @@
-﻿using MathQuizAsp.Validators;
+﻿using MathQuizData.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace MathQuizAsp.Models

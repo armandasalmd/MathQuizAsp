@@ -124,11 +124,6 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\TimerIsUpException.cs" />
-    <Compile Include="GameCore\Enum.cs" />
-    <Compile Include="GameCore\IQuestion.cs" />
-    <Compile Include="GameCore\MathInterpreter.cs" />
-    <Compile Include="GameCore\MathObject.cs" />
-    <Compile Include="GameCore\MathQuestion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,9 +170,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
-    <Content Include="Views\Error\NotFound.html" />
-    <Content Include="Views\Error\BadRequest.html" />
-    <Content Include="Views\Error\InternalError.html" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\InternalError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -195,6 +190,15 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MathQuizCore\MathQuizCore.csproj">
+      <Project>{3488ade9-00f3-467b-8301-eba57b539d80}</Project>
+      <Name>MathQuizCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

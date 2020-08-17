@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MathQuizCore.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using MathQuizAsp.GameCore;
 
-namespace MathQuizAsp.Validators
+namespace MathQuizData.Validators
 {
     public class IsDifficulty : ValidationAttribute
     {
