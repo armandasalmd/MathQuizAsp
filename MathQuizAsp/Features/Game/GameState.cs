@@ -3,9 +3,9 @@ using MathQuizCore.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace MathQuizAsp.Models
+namespace MathQuizAsp.Features.Game
 {
-    public class GameViewModel
+    public class GameState
     {
         public string Difficulty { get; }
         public int TotalQuestions { get; }
@@ -22,7 +22,7 @@ namespace MathQuizAsp.Models
         public int CurrentQuestionId { get; set; }
         public MathQuestion CurrentQuestion { get => AllQuestions[CurrentQuestionId]; }
 
-        public bool IsAnsweringMode { get; set; }
+        public bool IsAnsweringInProgress { get; set; }
 
         public string UserAnswer { get; set; }
 
@@ -32,18 +32,19 @@ namespace MathQuizAsp.Models
         }
 
         public long FinishTillTime { get; set; }
-        public bool IsQuizStillValid { 
+        public bool IsQuizStillValid
+        {
             get => FinishTillTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
-        public GameViewModel(string difficulty, int totalQuestions)
+        public GameState(string difficulty, int totalQuestions)
         {
             Difficulty = difficulty;
             TotalQuestions = totalQuestions;
             CurrentQuestionId = 0;
             AllQuestions = MathQuestion.GenerateRandom(totalQuestions,
                         (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficulty));
-            IsAnsweringMode = true;
+            IsAnsweringInProgress = true;
             UserAnswer = string.Empty;
             FinishTillTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + (totalQuestions * 5000 * 1); // 5s per question
         }
@@ -51,30 +52,30 @@ namespace MathQuizAsp.Models
         public bool CheckAnswer(int userGuess)
         {
             if (!IsQuizStillValid)
-                throw new Exceptions.TimerIsUpException("User's JS is probably disabled. Timer is up!");
+                throw new Core.Exceptions.TimerIsUpException("User's JS is probably disabled. Timer is up!");
 
             bool isUserCorrect = userGuess == CurrentQuestion.Answer;
             if (isUserCorrect)
             {
                 CorrectUserAnswers++;
             }
-            IsAnsweringMode = false;
+            IsAnsweringInProgress = false;
             UserAnswer = userGuess.ToString();
-            
+
             return isUserCorrect;
         }
 
         public void NextQuestion()
         {
             CurrentQuestionId++;
-            IsAnsweringMode = true;
+            IsAnsweringInProgress = true;
             UserAnswer = string.Empty;
         }
 
         public void ForceFinish()
         {
             CurrentQuestionId = TotalQuestions;
-            IsAnsweringMode = false;
+            IsAnsweringInProgress = false;
             UserAnswer = string.Empty;
         }
 

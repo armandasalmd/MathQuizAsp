@@ -1,88 +1,66 @@
-﻿namespace MathQuizAsp.Controllers
-{
-    using MathQuizAsp.Models;
-    using Microsoft.Ajax.Utilities;
-    using System;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
+﻿using MathQuizAsp.Core.Exceptions;
+using MathQuizAsp.Core.Filters;
+using MathQuizAsp.Features.Game;
+using MathQuizAsp.Models;
+using Microsoft.Ajax.Utilities;
+using System;
+using System.Web.Mvc;
+using System.Web.SessionState;
 
+namespace MathQuizAsp.Controllers
+{
+    [LoadGameState]
     [SessionState(SessionStateBehavior.Default)]
     public class GameController : Controller
     {
-
+        public const string GAME_STATE = "GameState";
+        private GameState Game
+        {
+            get
+            {
+                return Session[GAME_STATE] as GameState;
+            }
+        }
+        
         public ActionResult Index()
         {
-            // Validation
-            if (Session["ConfigDifficulty"] == null ||
-                Session["ConfigDifficulty"].ToString().IsNullOrWhiteSpace())
-            {
-                return RedirectToAction("Index", "Home", new { error = "Difficulty is not set!?" });
-            }
-            else if (Session["ConfigQuestionCount"] == null || (int)Session["ConfigQuestionCount"] < 1)
-            {
-                return RedirectToAction("Index", "Home", new { error = "Question count is not set!?" });
-            }
-
-            GameViewModel vm;
-            if (Session["GameViewModel"] == null)
-            {
-                string difficulty = (string)Session["ConfigDifficulty"];
-                int qcount = (int)Session["ConfigQuestionCount"];
-                vm = new GameViewModel(difficulty, qcount);
-                Session["GameViewModel"] = vm;
-            }
-            else
-            {
-                // INFO: now if I edit 'vm' Session["GameViewModel"] 
-                // also edits because it is variable by reference
-                vm = Session["GameViewModel"] as GameViewModel;
-            }
-            return View(vm);
+            return View(Game);
         }
 
         [HttpPost]
         public ActionResult Index(UserAnswer body)
         {
-            GameViewModel vm = Session["GameViewModel"] as GameViewModel;
-            if (vm == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            if (vm.IsAnsweringMode)
+            if (Game.IsAnsweringInProgress)
             {
                 if (!body.Answer.IsNullOrWhiteSpace())
                 {
                     int.TryParse(body.Answer, out int userGuess);
                     try
                     {
-                        vm.CheckAnswer(userGuess);
+                        Game.CheckAnswer(userGuess);
                     }
                     catch (Exception ex)
                     {
-                        if (ex.GetType() == typeof(Exceptions.TimerIsUpException))
+                        switch (ex)
                         {
-                            return RedirectToAction("TimerIsUp", "Game");
+                            case TimerIsUpException _:
+                                return RedirectToAction("TimerIsUp", "Game");
+                            default:
+                                throw ex;
                         }
-                        else throw ex;
                     }
                 }
             }
             else
             {
-                vm.NextQuestion();
+                Game.NextQuestion();
             }
-
-            return View(vm);
+            return View(Game);
         }
 
         public ActionResult TimerIsUp()
         {
-            GameViewModel vm = Session["GameViewModel"] as GameViewModel;
-            if (vm != null)
-            {
-                vm.ForceFinish();
-            }
+            Game.ForceFinish();
             return RedirectToAction("Index", "Game");
         }
     }

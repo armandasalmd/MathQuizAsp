@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathQuizAsp.Exceptions
+namespace MathQuizAsp.Core.Exceptions
 {
     public class TimerIsUpException : Exception
     {

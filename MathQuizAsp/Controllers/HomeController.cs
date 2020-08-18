@@ -10,16 +10,13 @@ namespace MathQuizAsp.Controllers
     [SessionState(SessionStateBehavior.Default)]
     public class HomeController : Controller
     {
+        public const string SESSION_DIFF = "ConfigDifficulty";
+        public const string SESSION_QCOUNT = "ConfigQuestionCount";
+
         public ActionResult Index()
         {
-            if (Session.Count > 0)
-            {
-                Session.Clear();
-            }
-
-            ViewBag.DifficultiesList = Enum.GetNames(typeof(DifficultyLevel)).ToList();
-
-            return View();
+            Session.Clear();
+            return View(new GameSettings());
         }
 
         [HttpPost]
@@ -29,8 +26,8 @@ namespace MathQuizAsp.Controllers
             {
                 try
                 {
-                    Session["ConfigDifficulty"] = gameConfig.Difficulty;
-                    Session["ConfigQuestionCount"] = int.Parse(gameConfig.QuestionCount);
+                    Session[SESSION_DIFF] = gameConfig.Difficulty;
+                    Session[SESSION_QCOUNT] = int.Parse(gameConfig.QuestionCount);
                     return RedirectToAction("Index", "Game");
                 }
                 catch (Exception)

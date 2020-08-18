@@ -1,10 +1,16 @@
-﻿using MathQuizData.Validators;
+﻿using MathQuizCore.Enums;
+using MathQuizData.Core.Validators;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MathQuizAsp.Models
 {
     public class GameSettings
     {
+        public readonly string DefaultDifficulty = DifficultyLevel.Medium.ToString();
+        public readonly IEnumerable<string> DifficultyOptions = Enum.GetNames(typeof(DifficultyLevel));
+
         [Display(Name = "Select difficulty:")]
         [IsDifficulty(ErrorMessage = "Incorrect difficulty")]
         [Required(ErrorMessage = "Select difficulty level")]

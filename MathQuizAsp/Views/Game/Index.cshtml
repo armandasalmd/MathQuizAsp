@@ -1,4 +1,4 @@
-﻿@model MathQuizAsp.Models.GameViewModel
+﻿@model MathQuizAsp.Features.Game.GameState
 @{
     ViewBag.Title = "Game mode";
 }
@@ -29,7 +29,7 @@
     <p>Answer the question below,</p>
     <h1 id="yellow-text" class="d-inline">@Model.CurrentQuestion.GetQuestion()</h1>
 
-    @if (Model.IsAnsweringMode)
+    @if (Model.IsAnsweringInProgress)
     {
         using (Html.BeginForm())
         {
@@ -41,7 +41,7 @@
         }
     }
 
-    @if (!Model.IsAnsweringMode)
+    @if (!Model.IsAnsweringInProgress)
     {
         <h1 class="d-inline">@Model.UserAnswer</h1>
         if (Model.UserAnswer == Model.CurrentQuestion.Answer.ToString())

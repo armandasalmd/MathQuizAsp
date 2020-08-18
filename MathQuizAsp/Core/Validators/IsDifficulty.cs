@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace MathQuizData.Validators
+namespace MathQuizData.Core.Validators
 {
     public class IsDifficulty : ValidationAttribute
     {

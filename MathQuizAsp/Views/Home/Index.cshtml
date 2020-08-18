@@ -6,7 +6,6 @@
 <h1 id="yellow-text">Welcome to MathQuiz</h1>
 <p>Select game difficulty and start playing!</p>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -16,7 +15,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Difficulty)
-        @Html.DropDownList("Difficulty", new SelectList(ViewBag.DifficultiesList, "Medium"), new { name = "Difficulty" })
+        @Html.DropDownList("Difficulty", new SelectList(Model.DifficultyOptions, Model.DefaultDifficulty), new { name = "Difficulty" })
         @Html.ValidationMessageFor(model => model.Difficulty, "", new { @class = "text-danger" })
     </div>
 
@@ -28,10 +27,11 @@
 
     <div class="form-group">
         <input class="board-btn" type="submit" value="Start playing!" />
-        @if (!Request.QueryString["error"].IsEmpty())
-        {
-            <p class="alert-danger">@Request.QueryString["error"]</p>
-        }
     </div>
+
+    @if (!Request.QueryString["error"].IsEmpty())
+    {
+    <p class="text-danger">@Request.QueryString["error"]</p>
+    }
 </div>
 }
