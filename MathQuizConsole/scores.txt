@@ -1,0 +1,13 @@
+========= Game results =========
+Timestamp: 18/08/2020 17:23:04
+Difficulty: Medium
+Accuracy: 2/5
+
+29 + 6 + 11 = 46
+52 / 26 = 2
+728 / 26 + 16 = 2 (Mistake. Correct answer 44)
+7 - 26 = 2 (Mistake. Correct answer -19)
+√ 25 + 17 = 2 (Mistake. Correct answer 22)
+
+
+

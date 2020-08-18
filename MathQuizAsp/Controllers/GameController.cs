@@ -39,15 +39,9 @@ namespace MathQuizAsp.Controllers
                     {
                         Game.CheckAnswer(userGuess);
                     }
-                    catch (Exception ex)
+                    catch (TimerIsUpException)
                     {
-                        switch (ex)
-                        {
-                            case TimerIsUpException _:
-                                return RedirectToAction("TimerIsUp", "Game");
-                            default:
-                                throw ex;
-                        }
+                        return RedirectToAction("TimerIsUp", "Game");
                     }
                 }
             }
