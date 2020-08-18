@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MathQuizAsp.Models
+namespace MathQuizAsp.ViewModels
 {
     public class UserAnswer
     {
+        [Required]
+        [RegularExpression(@"^-?\d+$", ErrorMessage = "This is not an integer number!")]
         public string Answer { get; set; }
-        public int UserAnswerInt
-        {
-            get
-            {
-                bool success = int.TryParse(Answer, out int parsedValue);
-                return success ? parsedValue : 0;
-            }
-        }
-
     }
 }

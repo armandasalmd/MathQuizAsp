@@ -1,7 +1,7 @@
 ﻿using MathQuizAsp.Core.Exceptions;
 using MathQuizAsp.Core.Filters;
 using MathQuizAsp.Features.Game;
-using MathQuizAsp.Models;
+using MathQuizAsp.ViewModels;
 using Microsoft.Ajax.Utilities;
 using System;
 using System.Web.Mvc;
@@ -53,6 +53,7 @@ namespace MathQuizAsp.Controllers
             }
             else
             {
+                ModelState.Clear();
                 Game.NextQuestion();
             }
             return View(Game);

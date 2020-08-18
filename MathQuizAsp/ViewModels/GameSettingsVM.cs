@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MathQuizAsp.Models
+namespace MathQuizAsp.ViewModels
 {
-    public class GameSettings
+    public class GameSettingsVM
     {
         public readonly string DefaultDifficulty = DifficultyLevel.Medium.ToString();
         public readonly IEnumerable<string> DifficultyOptions = Enum.GetNames(typeof(DifficultyLevel));

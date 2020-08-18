@@ -1,4 +1,4 @@
-﻿using MathQuizAsp.Models;
+﻿using MathQuizAsp.ViewModels;
 using MathQuizCore;
 using MathQuizCore.Enums;
 using System;
@@ -39,7 +39,7 @@ namespace MathQuizAsp.Features.Game
             get => FinishTillTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
-        public GameState(GameSettings settings)
+        public GameState(GameSettingsVM settings)
         {
             Difficulty = settings.Difficulty;
             TotalQuestions = settings.QuestionCount.AsInt();

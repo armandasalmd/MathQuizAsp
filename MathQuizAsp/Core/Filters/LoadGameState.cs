@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using MathQuizAsp.Controllers;
 using Microsoft.Ajax.Utilities;
 using System.Web.Routing;
-using MathQuizAsp.Models;
+using MathQuizAsp.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace MathQuizAsp.Core.Filters
@@ -23,7 +23,7 @@ namespace MathQuizAsp.Core.Filters
             if (currentGameState == null || 
                 currentGameState.GetType() != typeof(GameState))
             {
-                GameSettings newGameConfig = session[HomeController.GAME_CONFIG] as GameSettings;
+                GameSettingsVM newGameConfig = session[HomeController.GAME_CONFIG] as GameSettingsVM;
 
                 var validationCtx = new ValidationContext(newGameConfig, serviceProvider: null, items: null);
                 bool isConfigValid = Validator.TryValidateObject(newGameConfig, validationCtx, null, true);

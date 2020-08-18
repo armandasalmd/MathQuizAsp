@@ -1,4 +1,4 @@
-﻿using MathQuizAsp.Models;
+﻿using MathQuizAsp.ViewModels;
 using System.Web.Mvc;
 using System.Web.SessionState;
 
@@ -8,15 +8,15 @@ namespace MathQuizAsp.Controllers
     public class HomeController : Controller
     {
         public const string GAME_CONFIG = "GameConfig";
-        public GameSettings GameConfig
+        public GameSettingsVM GameConfig
         {
             get
             {
                 if (Session[GAME_CONFIG] == null)
                 {
-                    Session[GAME_CONFIG] = new GameSettings();
+                    Session[GAME_CONFIG] = new GameSettingsVM();
                 }
-                return Session[GAME_CONFIG] as GameSettings;
+                return Session[GAME_CONFIG] as GameSettingsVM;
             }
             set
             {
@@ -31,7 +31,7 @@ namespace MathQuizAsp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(GameSettings formData)
+        public ActionResult Index(GameSettingsVM formData)
         {
             if (ModelState.IsValid)
             {
