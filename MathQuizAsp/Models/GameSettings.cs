@@ -19,6 +19,5 @@ namespace MathQuizAsp.Models
         [Display(Name = "Select question count:")]
         [Required(ErrorMessage = "Select question count")]
         public string QuestionCount { get; set; }
-
     }
 }

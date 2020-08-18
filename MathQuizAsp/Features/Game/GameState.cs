@@ -1,7 +1,9 @@
-﻿using MathQuizCore;
+﻿using MathQuizAsp.Models;
+using MathQuizCore;
 using MathQuizCore.Enums;
 using System;
 using System.Collections.Generic;
+using System.Web.WebPages;
 
 namespace MathQuizAsp.Features.Game
 {
@@ -37,16 +39,17 @@ namespace MathQuizAsp.Features.Game
             get => FinishTillTime > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
-        public GameState(string difficulty, int totalQuestions)
+        public GameState(GameSettings settings)
         {
-            Difficulty = difficulty;
-            TotalQuestions = totalQuestions;
+            Difficulty = settings.Difficulty;
+            TotalQuestions = settings.QuestionCount.AsInt();
+
             CurrentQuestionId = 0;
-            AllQuestions = MathQuestion.GenerateRandom(totalQuestions,
-                        (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficulty));
+            AllQuestions = MathQuestion.GenerateRandom(TotalQuestions,
+                        (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), Difficulty));
             IsAnsweringInProgress = true;
             UserAnswer = string.Empty;
-            FinishTillTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + (totalQuestions * 5000 * 1); // 5s per question
+            FinishTillTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + (TotalQuestions * 5000 * 1); // 5s per question
         }
 
         public bool CheckAnswer(int userGuess)

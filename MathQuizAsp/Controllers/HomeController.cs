@@ -1,7 +1,4 @@
 ﻿using MathQuizAsp.Models;
-using MathQuizCore.Enums;
-using System;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.SessionState;
 
@@ -10,30 +7,36 @@ namespace MathQuizAsp.Controllers
     [SessionState(SessionStateBehavior.Default)]
     public class HomeController : Controller
     {
-        public const string SESSION_DIFF = "ConfigDifficulty";
-        public const string SESSION_QCOUNT = "ConfigQuestionCount";
+        public const string GAME_CONFIG = "GameConfig";
+        public GameSettings GameConfig
+        {
+            get
+            {
+                if (Session[GAME_CONFIG] == null)
+                {
+                    Session[GAME_CONFIG] = new GameSettings();
+                }
+                return Session[GAME_CONFIG] as GameSettings;
+            }
+            set
+            {
+                Session[GAME_CONFIG] = value;
+            }
+        }
 
         public ActionResult Index()
         {
             Session.Clear();
-            return View(new GameSettings());
+            return View(GameConfig);
         }
 
         [HttpPost]
-        public ActionResult Index(GameSettings gameConfig)
+        public ActionResult Index(GameSettings formData)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    Session[SESSION_DIFF] = gameConfig.Difficulty;
-                    Session[SESSION_QCOUNT] = int.Parse(gameConfig.QuestionCount);
-                    return RedirectToAction("Index", "Game");
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("Index", "Home", new { error = "Invalid options selected" });
-                }
+                GameConfig = formData;
+                return RedirectToAction("Index", "Game");
             }
             else
             {
