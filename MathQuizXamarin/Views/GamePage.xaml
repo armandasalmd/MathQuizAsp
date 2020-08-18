@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MathQuizXamarin.Views.GamePage"
+             x:Name="Container"
+             xmlns:converters="clr-namespace:MathQuizXamarin.Converters;assembly=MathQuizXamarin"
+             >
+    <!---->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:MessageTypeToColor x:Key="ColorConverter" />
+            <converters:MessageTypeToColor x:Key="BoolInverser" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <!-- Title section -->
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="{Binding Path=Title}" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            
+            <!-- Question/Answer section -->
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label FontSize="Medium" Padding="24" Text="{Binding Path=QuestionToDisplay}" />
+                    <Label FontSize="Medium" Padding="24" IsVisible="{Binding Path=IsQuestionAnswered}" Text="{Binding Path=AnswerToDisplay}" />
+                </StackLayout>
+                <Label FontSize="Medium" Padding="16" 
+                       TextColor="{Binding Path=MyMessageType, Converter={StaticResource ColorConverter}}" 
+                       IsVisible="{Binding Path=IsMessage}" 
+                       Text="{Binding Path=MessageToDisplay}" />
+                <Entry x:Name="UserInput" Keyboard="Numeric" Placeholder="Answer"/>
+            </StackLayout>
+            
+            <!-- Buttons section -->
+            <Button Text="Check answer" x:Name="ButtonCheck"
+                    IsEnabled="{Binding IsCheckButtonEnabled}"
+                    Command="{Binding CheckAnswerCommand}"/>
+            <Button Text="Next question" x:Name="ButtonNext"
+                    IsEnabled="{Binding IsNextButtonEnabled}"
+                    Command="{Binding NextQuestionCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

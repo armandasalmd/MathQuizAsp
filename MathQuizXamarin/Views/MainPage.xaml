@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MathQuizXamarin.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to MathQuiz" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <StackLayout x:Name="MainContainer" Margin="24,10,24,10">
+            <Label Text="Select game settings and start playing!"
+                   FontSize="Medium" TextColor="#3e3359"
+                   Margin="0,0,0,16"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                   HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                   Text="Difficulty:" FontSize="Medium"/>
+                <Picker Grid.Row="0" Grid.Column="1"
+                   ItemsSource="{Binding DifficultyNames}" SelectedItem="{Binding SelectedDifficulty, Mode=TwoWay}" />
+                <Label Grid.Row="1" Grid.Column="0"
+                   HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                   Text="Question count:" FontSize="Medium" />
+                <Entry Grid.Row="1" Grid.Column="1"
+                   Placeholder="Positive number" Keyboard="Numeric" Text="{Binding QuestionCount, Mode=TwoWay}" />
+                
+                <!-- <Stepper /> -->
+
+            </Grid>
+            <Label FontSize="Medium" Padding="16" 
+                       TextColor="Red" 
+                       IsVisible="{Binding Path=IsMessage}" 
+                       Text="{Binding Path=MessageToDisplay}" />
+            <Button Text="Start playing" HorizontalOptions="Center" Command="{Binding StartGameCommand}" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
