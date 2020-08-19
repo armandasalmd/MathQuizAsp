@@ -33,6 +33,7 @@ namespace MathQuizAsp.Features.Game
             get => AllQuestions.Count == CurrentQuestionId;
         }
 
+        public long StartTime { get; set; }
         public long FinishTillTime { get; set; }
         public bool IsQuizStillValid
         {
@@ -49,6 +50,7 @@ namespace MathQuizAsp.Features.Game
                         (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), Difficulty));
             IsAnsweringInProgress = true;
             UserAnswer = string.Empty;
+            StartTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             FinishTillTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + (TotalQuestions * 5000 * 1); // 5s per question
         }
 

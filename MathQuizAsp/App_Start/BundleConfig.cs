@@ -25,9 +25,13 @@ namespace MathQuizAsp
             bundles.Add(new ScriptBundle("~/bundles/timer").Include(
                       "~/Scripts/timer.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/progressBar").Include(
+                      "~/Scripts/progressBar.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-sk.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css",
+                      "~/Content/ProgressBar.css"));
         }
     }
 }
