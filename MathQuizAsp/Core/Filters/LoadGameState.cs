@@ -24,7 +24,7 @@ namespace MathQuizAsp.Core.Filters
                 currentGameState.GetType() != typeof(GameState))
             {
                 GameSettingsVM newGameConfig = session[HomeController.GAME_CONFIG] as GameSettingsVM;
-                bool isConfigValid = false;
+                bool isConfigValid;
                 try
                 {
                     var validationCtx = new ValidationContext(newGameConfig, serviceProvider: null, items: null);

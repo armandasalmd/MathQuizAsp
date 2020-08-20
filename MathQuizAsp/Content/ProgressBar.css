@@ -1,29 +1,18 @@
-﻿:root {
-    --status-bar-width: 910px;
-    --status-bar-height: 341px;
-}
-
-
-.rect-status {
-    width: var(--status-bar-width);
-    height: var(--status-bar-height);
-
-}
-
-.rect-status__inside {
-    width: var(--status-bar-width);
-    height: var(--status-bar-height);
+﻿.rect-status__inside {
     fill: transparent;
     stroke-width: 16;
     stroke: orange;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 250;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0;
 }
 
 .rect-status-wrapper {
     position: absolute;
 }
 
+.rect-status-wrapper-fixed {
+    position: fixed;
+}
 
 .rect-status-container {
     display: flex;

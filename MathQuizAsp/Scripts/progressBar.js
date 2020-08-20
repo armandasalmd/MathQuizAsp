@@ -1,5 +1,6 @@
-﻿var rect = document.querySelector("rect");
-var perimeter = (rect.width.baseVal.value + rect.height.baseVal.value) * 2;
+﻿const container = document.querySelector(".rect-status-container");
+const rect = document.querySelector("rect");
+const perimeter = (container.clientWidth + container.clientHeight) * 2;
 rect.style.strokeDasharray = `${perimeter}`;
 
 var startTimeElement = document.getElementById("start-time-input");
@@ -23,6 +24,16 @@ function setProgress(percent) {
     rect.style.strokeDashoffset = offset;
 }
 
+function setCorrectContainerSize() {
+    const container = document.querySelector(".rect-status-container");
+    const svg = document.querySelector(".rect-status");
+    svg.setAttribute("width", container.clientWidth);
+    svg.setAttribute("height", container.clientHeight);
+    svg.querySelector("rect").setAttribute("width", container.clientWidth);
+    svg.querySelector("rect").setAttribute("height", container.clientHeight);
+}
+
+setCorrectContainerSize();
 setProgress(getPercentLeft());
 
 // Starting the counter
@@ -33,5 +44,5 @@ if (startTimeElement && finishTimeElement) {
 } else {
     // Game over
     clearInterval(x);
-    setProgress(0);
+    setProgress(250);
 }
