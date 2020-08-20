@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathQuizXamarin.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathQuizXamarin.UWP", "MathQuizXamarin.UWP\MathQuizXamarin.UWP.csproj", "{8A3A1585-7B3F-4189-9988-39C35D087954}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathQuizCore.Test", "MathQuizCore.Test\MathQuizCore.Test.csproj", "{14D33741-301D-40A0-96ED-C7C87A8ECDAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,22 @@ Global
 		{8A3A1585-7B3F-4189-9988-39C35D087954}.Release|x86.ActiveCfg = Release|x86
 		{8A3A1585-7B3F-4189-9988-39C35D087954}.Release|x86.Build.0 = Release|x86
 		{8A3A1585-7B3F-4189-9988-39C35D087954}.Release|x86.Deploy.0 = Release|x86
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|ARM.Build.0 = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|x64.Build.0 = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Debug|x86.Build.0 = Debug|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|ARM.Build.0 = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|x64.ActiveCfg = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|x64.Build.0 = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|x86.ActiveCfg = Release|Any CPU
+		{14D33741-301D-40A0-96ED-C7C87A8ECDAB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

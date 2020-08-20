@@ -4,6 +4,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    margin-top: 32px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -44,7 +45,7 @@ textarea {
 .class-board {
     background-color: darkgreen;
     border-width: 6px;
-    margin-top: 32px;
+    margin: 12px;
 }
 
 .class-board h1 {
@@ -67,4 +68,9 @@ textarea {
 
 #timer-container p {
     display: inline;
+}
+
+.my-content {
+    display: flex;
+    justify-content: center;
 }

@@ -137,6 +137,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-sk.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\ProgressBar - Copy.css" />
     <Content Include="Content\ProgressBar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -147,6 +148,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\progressBar - Copy.js" />
     <Content Include="Scripts\progressBar.js" />
     <Content Include="Scripts\timer.js" />
     <Content Include="Web.config" />

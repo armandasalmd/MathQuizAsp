@@ -21,15 +21,19 @@
     </div>
     <div class="container body-content">
 
-        <div class="jumbotron class-board">
-            @RenderBody()
+        <div class="wrapped-progress-bar">
+            <div class="jumbotron class-board">
+                @RenderBody()
+            </div>
         </div>
+        
 
         @if (Request.Path == "/Game")
         {
-            <div class="rect-status-container" id="desks-img">
-                @{ Html.RenderPartial("ProgressBar"); }
-                <img src="@Url.Content("~/Content/Images/desk.png")" alt="desks" />
+            <div class="" id="desks-img">
+                <div class="my-content">
+                    <img src="@Url.Content("~/Content/Images/desk.png")" alt="desks" />
+                </div>
             </div>
         }
         <hr />
@@ -47,5 +51,9 @@
         @Scripts.Render("~/bundles/progressBar")
     }
     @RenderSection("scripts", required: false)
+
+
+        
+
 </body>
 </html>
