@@ -24,12 +24,21 @@ namespace MathQuizAsp.Core.Filters
                 currentGameState.GetType() != typeof(GameState))
             {
                 GameSettingsVM newGameConfig = session[HomeController.GAME_CONFIG] as GameSettingsVM;
-
-                var validationCtx = new ValidationContext(newGameConfig, serviceProvider: null, items: null);
-                bool isConfigValid = Validator.TryValidateObject(newGameConfig, validationCtx, null, true);
+                bool isConfigValid = false;
+                try
+                {
+                    var validationCtx = new ValidationContext(newGameConfig, serviceProvider: null, items: null);
+                    isConfigValid = Validator.TryValidateObject(newGameConfig, validationCtx, null, true);
+                }
+                catch
+                {
+                    filterContext.Result = GenerateRedirectUrl("BadRequest", "Error");
+                    return;
+                }
                 if (!isConfigValid)
                 {
                     filterContext.Result = GenerateRedirectUrl("BadRequest", "Error");
+                    return;
                 }
 
                 currentGameState = new GameState(newGameConfig);
