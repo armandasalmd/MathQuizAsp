@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MathQuiz</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/progressBar.css" />
+    
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="icon">
+                    <img src="@Url.Content("~/images/calculator.png")" />
+                </span>
+
+                @Html.ActionLink("Math school", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+        <div class="wrapped-progress-bar">
+            <div class="jumbotron class-board">
+                @RenderBody()
+            </div>
+        </div>
+
+
+        @if (Context.Request.Path == "/Game")
+        {
+            <div class="" id="desks-img">
+                <div class="my-content">
+                    <img src="@Url.Content("~/images/desk.png")" alt="desks" />
+                </div>
+            </div>
+        }
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MathQuiz application</p>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/knockout.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @if (Context.Request.Path == "/Game")
+    {
+        <script src="~/js/timer.js"></script>
+        <script src="~/js/progressBar.js"></script>
+
+    }
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿:root {
+    --progress-bar-size: 10px;
+    --progress-bar-color: orange;
+}
+
+.wrapped-progress-bar {
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-border {
+    
+    position: absolute;
+}
+
+.progress-border#top {
+    background-color: var(--progress-bar-color);
+    width: 100%;
+    height: var(--progress-bar-size);
+    top: 0;
+}
+
+.progress-border#right {
+    background-color: var(--progress-bar-color);
+    width: var(--progress-bar-size);
+    height: 100%;
+    right: 0;
+}
+
+.progress-border#bottom {
+    background-color: var(--progress-bar-color);
+    width: 100%;
+    height: var(--progress-bar-size);
+    bottom: 0;
+}
+
+.progress-border#left {
+    background-color: var(--progress-bar-color);
+    width: var(--progress-bar-size);
+    height: 100%;
+    left: 0;
+}
